@@ -1,0 +1,28 @@
+GCD (Greatest Common Divisor)
+    - Largest number that divides each of the integers
+    - What is the greatest common divisor of 54 and 24?
+
+    The numbers that these two lists share in common are the common divisors of 54 and 24:
+    Common divisiors : {1,2,3,6 }. The greatest of these is 6. That is, the greatest common divisor of 54 and 24. One writes:
+
+    gcd(54,24) = 6
+
+    Euclid's Algorithm to get GCD
+        - m/n -> Quotient -> q ; Remainder -> r
+        - Till remainder is 0
+            -> m = n ; n = r; ie (n/r -> ...)
+         - If r =0 ; then Quotient is the GCD
+
+LCM
+
+
+Prime
+
+Fibonacci Series
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
+
+
+
+
+Matrix Transpose
+    - Rows become columns and vice versa.
