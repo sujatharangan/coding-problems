@@ -56,10 +56,9 @@ public class Sorting {
     public static int[] bubbleSort(int[] arr) {
 
         int lastIndex = arr.length;
+
         while(lastIndex != 0) {
-
             for(int j = 0 ; j < lastIndex -1 ; j++) {
-
                 if (arr[j] > arr[j+1]) {
                     //swap adjacent elements so that right side element is larger.
                     int temp = arr[j];

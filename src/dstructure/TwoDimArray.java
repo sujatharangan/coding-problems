@@ -1,4 +1,4 @@
-package datastructure;
+package dstructure;
 
 import java.lang.*;
 
@@ -67,6 +67,7 @@ public class TwoDimArray {
     public static void printMatrix(int[][] matrix) {
 
         int rowCount = matrix.length;
+        //In java , each row is an array.
         int colCount = matrix[0].length;
 
         System.out.println("Total Row = " + rowCount + " Total Col =" + colCount);
