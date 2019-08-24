@@ -1,0 +1,39 @@
+Table: Customers.
+
++----+-------+
+| Id | Name  |
++----+-------+
+| 1  | Joe   |
+| 2  | Henry |
+| 3  | Sam   |
+| 4  | Max   |
++----+-------+
+Table: Orders.
+
++----+------------+
+| Id | CustomerId |
++----+------------+
+| 1  | 3          |
+| 2  | 1          |
++----+------------+
+
+
+1) Write a SQL query to find all customers who never order anything.
+- SELECT Name FROM Customers WHERE Id NOT in (select CustomerId from Orders);
+
+2) Write a SQL query to find all customers who order.
+- select c.Name from Customers c inner join Orders o on c.Id = o.CustomerId ;
+- select Name from Customers where Id in (select CustomerId from Orders);
+
+
+General
+- Get all countries without duplicates
+    - select DISTINCT Country from Customers
+- Where clause operators:
+       - <> , BETWEEN, IN, LIKE
+       - NOT
+               select * from Customers
+                    - where NOT country ='Germany'
+                    - where Country='Germany' OR Country='Spain';
+                    - where NOT Country='Germany' AND NOT Country='USA';
+                    - where Country='Germany' AND (City='Berlin' OR City='München');

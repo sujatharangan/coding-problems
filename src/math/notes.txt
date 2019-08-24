@@ -22,7 +22,9 @@ Fibonacci Series
 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
 
 
-
-
 Matrix Transpose
     - Rows become columns and vice versa.
+
+
+Note : Dividing and Mod of 10 gets digits of the number
+If Num is 128 ; 128/10 => 12 and 128 %10 = 8

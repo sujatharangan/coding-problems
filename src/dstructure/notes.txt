@@ -41,3 +41,12 @@ Algorithm
         - Time it takes - Time Analysis
             - Growth of time for Large data sizes . Linear or Quadratic Growth-> Asymptotic Analysis.
             - Assume infinite rama and that data is in ram.
+
+Recursion
+    - Cleaner code but would be more memory and time intensive than iterative.
+    - Internally uses stack for method call ref.
+    - Even with a terminating condition, if the number of calls to  recursive function is too much (that is large input), it can still lead to stack overflow error.
+
+Conversion
+    - char[] to String -> String.valueOf(charArr)
+    - String to char[] -> str.toCharArray()
