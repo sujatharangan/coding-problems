@@ -51,4 +51,31 @@ public class StrProbs {
             return numJewelsInStone;
         }
 
+    /**
+     * LeetCode : #1108
+     * Given a valid (IPv4) IP address, return a defanged version of that IP address.
+     A defanged IP address replaces every period "." with "[.]".
+     * @param address
+     * @return
+     */
+    public static String defangIPaddr(String address) {
+        //Note "." is a special character in regex. So to use in split, use \\. instead.
+        String[] str = address.split("\\.");
+        StringBuffer buf = new StringBuffer();
+
+        for (int i = 0 ; i < str.length; i++) {
+            buf.append(str[i]);
+
+            //should not insert for last record
+            if (i != str.length-1) {
+                buf.append("[.]");
+            }
+        }
+
+        return buf.toString();
+    }
+
+    public static void main(String args[]){
+        System.out.println(defangIPaddr("1.1.1.1"));
+    }
 }

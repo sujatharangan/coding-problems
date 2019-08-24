@@ -12,11 +12,16 @@ public class Array {
         int[] nums1 = {1, 3, 9, 4, 2};
         // System.out.println(dominantIndex(nums1));
 
-        int[] nums2 = {1, 7, 3, 6, 5, 6};
+        int[] nums2 = {1, 0, 7, 3, 6, 5, 6};
         //System.out.println(pivotIndex(nums2));
 
         //System.out.print(reverse(nums1));
-        System.out.println(reverseUsingRecursion(nums2));
+       // System.out.println(reverseUsingRecursion(nums2));
+
+        duplicateZeros(nums2);
+        for (int i = 0 ; i < nums2.length; i++) {
+            System.out.println(nums2[i]);
+        }
 
     }
 
@@ -303,6 +308,37 @@ public class Array {
                          .mapToInt(i -> i)
                          .toArray();
             */
+    }
+
+    /**
+     * Leet Code problem #1089
+     * Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.
+
+    * [1,0,2,3,0,4,5,0] -> [1,0,0,2,3,0,0,4]
+     * @param arr
+     */
+    public static void duplicateZeros(int[] arr) {
+
+        int i = 0;
+        while( i < arr.length) {
+
+            if (arr[i] == 0 && (i+1) < arr.length) {
+                int temp = arr[i+1];
+                arr[i+1] = 0;
+                int j = i+2;
+
+                while (j < arr.length) {
+                    int temp1 = arr[j];
+                    arr[j] = temp;
+                    temp = temp1;
+                    j++;
+                }
+                // Ignore the zero we have just replaced.
+                i = i +2;
+            } else {
+                i++;
+            }
+        }
     }
 
 
