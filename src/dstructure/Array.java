@@ -1,20 +1,22 @@
 package dstructure;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Array {
 
     public static void main(String[] args) {
         int[] nums = {1, 2, 3};
-        System.out.println(plusOne(nums));
+        // System.out.println(plusOne(nums));
 
         int[] nums1 = {1, 3, 9, 4, 2};
-        System.out.println(dominantIndex(nums1));
+        // System.out.println(dominantIndex(nums1));
 
         int[] nums2 = {1, 7, 3, 6, 5, 6};
-        System.out.println(pivotIndex(nums2));
+        //System.out.println(pivotIndex(nums2));
 
-        System.out.print(reverse(nums1));
+        //System.out.print(reverse(nums1));
+        System.out.println(reverseUsingRecursion(nums2));
 
     }
 
@@ -141,7 +143,8 @@ public class Array {
         return pivotIndex;
     }
 
-    //Reverse an array using two pointers
+    //Reverse an array using two pointers one in the start and another in the end
+    // Keep incrementing the start and decrementing the end and swap.
     // [1, 5, 6,9] -> [9, 6 5,1]
 
     public static int[] reverse(int[] nums) {
@@ -159,6 +162,25 @@ public class Array {
     }
 
 
+    // Tail Recursion using two pointers
+    public static int[] reverseUsingRecursion(int[] nums, int startIndex, int endIndex) {
+
+        if (startIndex >= endIndex) {
+            return nums;
+        }
+        int temp;
+        //swap
+        temp = nums[startIndex];
+        nums[startIndex] = nums[endIndex];
+        nums[endIndex] = temp;
+
+        return reverseUsingRecursion(nums, startIndex + 1, endIndex - 1);
+    }
+
+    public static int[] reverseUsingRecursion(int[] nums) {
+        reverseUsingRecursion(nums, 0, nums.length - 1);
+        return nums;
+    }
 
 //    /*
 //    Diagonal traverse a m*n matrix
@@ -194,4 +216,94 @@ public class Array {
 //    public List<List<Integer>> generate(int numRows) {
 //        return null;
 //    }
+
+
+    //Given a binary array, find the maximum number of consecutive 1s in this array.
+    //The input array will only contain 0 and 1.
+    public int findMaxConsecutiveOnes(int[] nums) {
+
+        int countMaxOne = 0;
+        int currentSeqCount = 0;
+        boolean isOneCurrentSeq = false;
+
+        for (int k = 0; k < nums.length; k++) {
+            if (nums[k] == 1) {
+                currentSeqCount++;
+                isOneCurrentSeq = true;
+            } else {
+                if (isOneCurrentSeq) {
+                    //Going from 1 -> 0
+                    if (currentSeqCount > countMaxOne) {
+                        countMaxOne = currentSeqCount;
+                    }
+                }
+                currentSeqCount = 0;
+
+            }
+        }
+        if (currentSeqCount > countMaxOne) {
+            countMaxOne = currentSeqCount;
+        }
+        return countMaxOne;
+    }
+
+
+    //Given array of even and odd numbers ; return array of even first followed by odd or odd first followed by even
+    //LC : # 905
+    public int[] sortArrayByParity(int[] A) {
+
+        if (A.length == 0) {
+            return A;
+        }
+
+        ArrayList even = new ArrayList();
+        ArrayList odd = new ArrayList();
+
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] % 2 == 0) {
+                even.add(A[i]);
+            } else {
+                odd.add(A[i]);
+            }
+        }
+        //Add all odd elements to even list
+        even.addAll(odd);
+
+        //Convert list to array
+        int[] evenOddArr = new int[A.length];
+
+        for (int j = 0; j < even.size(); j++) {
+            evenOddArr[j] = (int) even.get(j);
+        }
+        return evenOddArr;
+    }
+
+    //Solution 2 : 1 pass ; create two pointers in result array in beggining and end
+    public int[] sortArrayByParity2(int[] A) {
+        int evenPointer = 0;
+        int oddPointer = A.length - 1;
+        int[] sortedArray = new int[A.length];
+
+        for (int i = 0; i < A.length; i++) {
+            int val = A[i];
+            if (val % 2 == 0) {
+                sortedArray[evenPointer] = val;
+                evenPointer++;
+            } else {
+                sortedArray[oddPointer] = val;
+                oddPointer--;
+            }
+        }
+        return sortedArray;
+
+            /* Alternative:
+            return Arrays.stream(A)
+                         .boxed()
+                         .sorted((a, b) -> Integer.compare(a%2, b%2))
+                         .mapToInt(i -> i)
+                         .toArray();
+            */
+    }
+
+
 }

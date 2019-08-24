@@ -1,12 +1,17 @@
 package math;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Math {
 
 
     public static void main(String args[]) {
-        int gcdValue = gcd(54, 24);
-        System.out.println(gcdValue);
+      //  int gcdValue = gcd(54, 24);
+      //  System.out.println(gcdValue);
+       // System.out.println(pascalsTriangle(5));
+        System.out.println(factorial(1));
     }
 
     /*
@@ -30,19 +35,86 @@ public class Math {
     }
 
 
+
     /*
-    Fibonacci sequence = 0,1,1,2,3,5,8,13 ....
-    F(0) = 0; F(1) = 1;
-    F(N) = F(N-1) + F(N-2) for N > 1
+    Factorial(n) = n * (n-1) * (n-2) ... *1
      */
-    public static int fibonacci(int N) {
-        if(N == 0) {
-            return 0;
+    public static int factorial(int num) {
+
+        int fact = num;
+        if (num != 1) {
+            fact = fact * factorial(num - 1);
         }
-        if (N ==1){
-            return 1;
+        return fact;
+    }
+
+    /**
+     * Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
+     * In Pascal's triangle, each number is the sum of the two numbers directly above it.
+     * Sample output for numRows=5
+     * [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]
+     *
+     *     [1],
+     *    [1,1],
+     *   [1,2,1],
+     *  [1,3,3,1],
+     * [1,4,6,4,1]
+     * @param numRows
+     * @return
+     */
+    public static List<List<Integer>> pascalsTriangle(int numRows) {
+        List<List<Integer>> pascalsTrig = new ArrayList<List<Integer>>();
+
+        for (int i = 0; i < numRows; i++) {
+
+            List<Integer> pascalsTriangleRow = new ArrayList<Integer>();
+
+            for (int j =0 ; j <= i; j++ ){
+
+                //First and last elements are always 1
+                 if (j == 0 || j == i) {
+                     pascalsTriangleRow.add(1);
+                 } else {
+                     //Get previous list and add the two indexes to left.
+                     List<Integer> previous = pascalsTrig.get(i-1);
+                     pascalsTriangleRow.add(previous.get(j) + previous.get(j-1));
+                 }
+            }
+            pascalsTrig.add(pascalsTriangleRow);
         }
-        return fibonacci(N-1) + fibonacci(N-2);
+        return  pascalsTrig;
+    }
+
+    // Check if number is self dividing by each digit
+    // Self diving if each digit is non-zero and divides the number. For example, with 128 is self diving coz 128 is divisble by 1 , 2 and 8
+    //LC # 728
+    public static List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> selfDivNumList = new ArrayList<Integer>();
+
+        for(int i = left ; i <=right ; i++) {
+
+            if( isNumSelfDividing(i)) {
+                selfDivNumList.add(i);
+            }
+        }
+        return selfDivNumList;
+    }
+
+    //Note : DIviding and Mod of 10 gets digits of the number
+    public static boolean isNumSelfDividing(int num){
+        int x = num;
+        int y = num;
+        while ( x!= 0 && y!= 0){
+            y = x % 10;
+            x = x / 10;
+            if (y == 0){
+                return false;
+            }
+            if( num % y != 0){
+                return false;
+            }
+        }
+        return true;
     }
 
 

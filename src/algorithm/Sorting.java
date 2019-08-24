@@ -4,11 +4,19 @@ public class Sorting {
 
     public static void main(String[] args) {
 
-        int[] array = {2,10,8,6,7,3};
-        printArray(array);
+       int[] array = {2,10,8,6,7,3};
+
+
+       // printArray(array);
         //printArray(selectionSort(array));
        // printArray(bubbleSort(array));
-        printArray(insertionSort(array));
+       // printArray(insertionSort(array));
+
+        //int[] array1 = {2,5, 8,23};
+        //int[] array2 = {7,9,12, 16};
+        // printArray(mergeSortedArrays(array1, array2));
+
+       printArray(mergeSort(array, 0, array.length-1));
     }
 
 
@@ -100,8 +108,6 @@ public class Sorting {
         return arr;
     }
 
-
-
     public static void printArray(int[] array) {
 
         System.out.println("Size = " + array.length );
@@ -109,5 +115,67 @@ public class Sorting {
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " ");
         }
+    }
+
+
+    /**
+     * Merge two sorted arrays
+     * @param x
+     * @param y
+     * @return
+     */
+    public static int[] mergeSortedArrays(int[] x, int[] y) {
+
+        int[] merged = new int[x.length + y.length];
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while( i < x.length && j < y.length) {
+            if (x[i] <= y[j]) {
+                merged[k] =  x[i];
+                i++;
+            } else {
+                merged[k] =  y[j];
+                j++;
+            }
+            k++;
+        }
+        //copy remaining x and y if any
+        while (i < x.length) {
+            merged[k] = x[i];
+            k++;
+            i++;
+        }
+        while (j < y.length) {
+            merged[k] = y[j];
+            k++;
+            j++;
+        }
+        return merged;
+    }
+
+    public static int[] mergeSort(int[] arr, int startIndex, int endIndex) {
+        if (startIndex >= endIndex) {
+            return arr;
+        }
+
+        int mid = arr.length / 2;
+        int[] left = new int[mid];
+        int[] right = new int[arr.length - mid];
+
+        //copy and create left and right temp arrays
+        for (int i = 0; i < mid; i++) {
+            left[i] = arr[i];
+        }
+        for (int i = mid; i < arr.length; i++) {
+            right[i - mid] = arr[i];
+        }
+
+        int[] l = mergeSort(left, 0, mid-1);
+        int[] r =mergeSort(right, mid , arr.length-1);
+
+        return mergeSortedArrays(l, r);
     }
 }
